@@ -1,4 +1,0 @@
-Coloque aqui as imagens do site.
-
-- centraldobelo.jpg: print do site Central do Belo (proporção ~16:10).
-  Depois, no index.html, procure "assets/centraldobelo.jpg" e descomente a linha <img>.

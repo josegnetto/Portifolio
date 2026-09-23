@@ -10,7 +10,8 @@ index.html     estrutura e conteúdo da página
 css/style.css  estilos (cores, tipografia, layout, responsividade)
 js/main.js     efeitos: luz que segue o mouse, animações de entrada, barra de progresso
 favicon.svg    ícone da aba
-assets/        imagens (prints de projetos etc.)
+og-image.jpg   imagem de prévia ao compartilhar o link (1200×630)
+assets/        imagens dos projetos (prints)
 vercel.json    configuração de deploy na Vercel
 ```
 
@@ -29,7 +30,7 @@ No `index.html`, dentro da seção `#projetos`, copie um bloco
 
 ## Deploy
 
-Hospedado na Vercel, com deploy automático a cada push na branch `main`.
+Hospedado na Vercel em https://joseneto-dev.vercel.app, com deploy automático a cada push na branch `main`.
 
 ## Contato
 
