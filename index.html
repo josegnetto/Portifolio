@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>José Neto — Desenvolvedor Web</title>
+<meta name="description" content="José Neto, desenvolvedor web. Sites sob medida que resolvem problemas reais de empresas, com orçamento personalizado para cada cliente.">
+<meta property="og:title" content="José Neto — Desenvolvedor Web">
+<meta property="og:description" content="Sites sob medida para empresas, pensados a partir do problema que cada negócio precisa resolver.">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --bg-2:#111;
+    --card:#151515;
+    --line:#232323;
+    --ink:#f3f2ee;
+    --muted:#7c7a76;
+    --soft:#a9a7a2;
+    --display:"Inter Tight",system-ui,sans-serif;
+    --body:"Inter",system-ui,sans-serif;
+    --label:"Inter",system-ui,sans-serif;
+    --pad:clamp(20px,6vw,88px);
+    --max:1180px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--body);
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 600px at 80% -10%,rgba(255,255,255,.07),transparent 60%),
+      radial-gradient(700px 500px at -10% 60%,rgba(255,255,255,.035),transparent 60%);
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+  /* Type */
+  .label{font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  h1,h2,h3{font-family:var(--display);letter-spacing:-.045em;line-height:.96;font-weight:700}
+  h2{font-size:clamp(42px,7vw,92px)}
+  .dim{color:var(--muted)}
+  .lead{font-size:clamp(18px,2vw,22px);color:var(--soft);max-width:620px;line-height:1.6}
+  .num{font-family:var(--label);font-weight:500;font-size:clamp(15px,1.5vw,18px);letter-spacing:.06em;color:var(--muted)}
+
+  /* Nav */
+  header{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    background:rgba(11,11,11,.72);border-bottom:1px solid transparent;transition:border-color .3s;
+  }
+  header.scrolled{border-color:var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .brand{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.03em}
+  .links{display:flex;gap:32px;font-size:15px;color:var(--soft)}
+  .links a{transition:color .2s}
+  .links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--display);font-weight:600;font-size:15px;
+    padding:13px 22px;border-radius:999px;background:var(--ink);color:#0b0b0b;
+    transition:transform .2s,opacity .2s;
+  }
+  .btn:hover{transform:translateY(-1px);opacity:.92}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:#3a3a3a}
+  @media (max-width:860px){ .links{display:none} }
+
+  /* Sections */
+  section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:clamp(36px,5vw,64px)}
+  .card{position:relative;isolation:isolate;background:var(--card);border:1px solid var(--line);border-radius:26px;transition:border-color .3s}
+  .card:hover{border-color:#343434}
+  .card::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.06),transparent 60%);
+    opacity:0;transition:opacity .4s;
+  }
+  .card:hover::before{opacity:1}
+  .card.invert::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(0,0,0,.05),transparent 60%)}
+
+  /* Hero */
+  .hero{border-top:0;min-height:calc(100vh - 76px);display:flex;align-items:center;padding:clamp(48px,8vw,96px) 0}
+  .hero .wrap{width:100%}
+  .hero h1{font-size:clamp(54px,10.5vw,144px);font-weight:800;margin-bottom:48px}
+  .hero h1 .dim{font-weight:600}
+  .hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:32px 64px;align-items:end}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr} .hero-cta{justify-content:flex-start} }
+
+  /* About */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,110px);align-items:start}
+  .rule{width:120px;height:1px;background:#3a3a3a;margin:36px 0}
+  .about .big{font-size:clamp(19px,2.1vw,24px);line-height:1.6}
+  .about .big + .big{margin-top:22px}
+  .about .quiet{margin-top:28px;font-size:clamp(16px,1.6vw,19px);color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+  .stat{background:var(--bg-2);padding:26px 22px}
+  .stat b{display:block;font-family:var(--display);font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;line-height:1}
+  .stat span{display:block;margin-top:10px;font-size:14px;color:var(--muted);line-height:1.4}
+  @media (max-width:900px){ .about{grid-template-columns:1fr} }
+  @media (max-width:480px){ .stat{padding:20px 14px} .stat span{font-size:12.5px} }
+
+  /* Problems */
+  .qa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .q{padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;gap:18px;min-height:280px}
+  .q blockquote{font-family:var(--display);font-weight:500;font-size:clamp(20px,1.9vw,24px);letter-spacing:-.025em;line-height:1.25;color:var(--muted)}
+  .q blockquote::before{content:"“"}
+  .q blockquote::after{content:"”"}
+  .q .ans{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+  .q .ans span{font-size:20px;line-height:1.3}
+  .q .ans p{font-family:var(--display);font-weight:600;font-size:clamp(18px,1.7vw,21px);letter-spacing:-.02em;line-height:1.3}
+  @media (max-width:1000px){ .qa{grid-template-columns:repeat(2,minmax(0,1fr))} }
+  @media (max-width:620px){ .qa{grid-template-columns:1fr} .q{min-height:0} }
+
+  /* Budget */
+  .budget{display:grid;grid-template-columns:1fr 1.05fr;gap:18px;align-items:stretch}
+  .budget .side{padding:clamp(30px,4vw,52px);display:flex;flex-direction:column;gap:22px}
+  .budget .side p{color:var(--soft);font-size:18px}
+  .budget .invert{background:var(--ink);color:#0b0b0b;border-color:var(--ink)}
+  .budget .invert h3{font-size:clamp(34px,4.4vw,60px)}
+  .budget .invert p{color:#4a4945}
+  .budget .invert .label{color:#6c6a66}
+  .factors{list-style:none;counter-reset:f}
+  .factors li{counter-increment:f;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:20px 0;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:500;font-size:clamp(18px,1.8vw,22px);letter-spacing:-.02em;line-height:1.3}
+  .factors li::before{content:counter(f,decimal-leading-zero);font-family:var(--label);font-size:14px;letter-spacing:.06em;color:var(--muted);padding-top:4px}
+  .factors li:last-child{border-bottom:0}
+  .note{margin-top:auto;padding:18px 20px;border-radius:16px;background:#e6e4de;font-size:16px;color:#3a3936}
+  @media (max-width:900px){ .budget{grid-template-columns:1fr} }
+
+  /* Work */
+  .work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .project{overflow:hidden;display:flex;flex-direction:column}
+  .project.feature{grid-column:1 / -1;display:grid;grid-template-columns:1.25fr 1fr}
+  .shot{position:relative;background:#0f0f0f;border-bottom:1px solid var(--line);aspect-ratio:16/10;overflow:hidden}
+  .project.feature .shot{border-bottom:0;border-right:1px solid var(--line);aspect-ratio:auto;min-height:400px}
+  .browser{position:absolute;inset:clamp(18px,3vw,36px) clamp(18px,3vw,36px) 0;border-radius:14px 14px 0 0;border:1px solid #2a2a2a;border-bottom:0;background:#141414;overflow:hidden;transition:transform .5s var(--ease)}
+  .project:hover .browser{transform:translateY(-8px)}
+  .bar{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:1px solid #242424}
+  .bar i{width:10px;height:10px;border-radius:50%;background:#2d2d2d}
+  .bar em{margin-left:14px;font-style:normal;font-size:12px;color:var(--muted);background:#1c1c1c;padding:4px 12px;border-radius:999px;font-family:var(--label);letter-spacing:.04em}
+  .mock{padding:clamp(20px,3vw,34px)}
+  .mock .kicker{font-family:var(--label);font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+  .mock .title{font-family:var(--display);font-weight:800;letter-spacing:-.045em;font-size:clamp(30px,4vw,54px);line-height:.95;margin:14px 0 22px}
+  .mock .rows{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .mock .rows div{height:74px;border-radius:10px;background:linear-gradient(160deg,#1f1f1f,#171717);border:1px solid #232323}
+  .mock .lines{margin-top:16px;display:grid;gap:8px}
+  .mock .lines span{height:8px;border-radius:4px;background:#1f1f1f}
+  .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+  .info{padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;gap:14px;flex:1}
+  .info h3{font-size:clamp(28px,3.2vw,42px)}
+  .info p{color:var(--soft);font-size:17px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap}
+  .meta span{font-family:var(--label);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+  .did{list-style:none;display:grid;gap:8px;font-size:15px;color:var(--muted)}
+  .did li::before{content:"— ";color:#4a4a4a}
+  .visit{margin-top:auto;padding-top:14px;display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:17px}
+  .visit span{transition:transform .25s}
+  .visit:hover span{transform:translate(3px,-3px)}
+  .slot{
+    position:absolute;inset:clamp(18px,3vw,36px);border:1px dashed #2f2f2f;border-radius:14px;
+    display:grid;place-items:center;text-align:center;color:var(--muted);
+    background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(255,255,255,.015) 14px 28px);
+  }
+  .slot b{display:block;font-family:var(--display);font-size:clamp(40px,5vw,64px);letter-spacing:-.04em;color:#2c2c2c;line-height:1;margin-bottom:8px}
+  .slot small{font-family:var(--label);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+  @media (max-width:900px){
+    .work{grid-template-columns:1fr}
+    .project.feature{grid-template-columns:1fr}
+    .project.feature .shot{border-right:0;border-bottom:1px solid var(--line);min-height:0;aspect-ratio:16/11}
+  }
+
+  /* Timeline */
+  .timeline{list-style:none;border-top:1px solid var(--line)}
+  .timeline li{display:grid;grid-template-columns:120px 1fr 1.2fr;gap:24px;align-items:baseline;padding:clamp(26px,3vw,38px) 0;border-bottom:1px solid var(--line);transition:padding .3s var(--ease)}
+  .timeline li:hover{padding-left:12px}
+  .timeline .n{font-family:var(--display);font-weight:700;font-size:clamp(34px,4vw,54px);letter-spacing:-.05em;color:#2f2f2f;line-height:1;transition:color .3s}
+  .timeline li:hover .n{color:var(--ink)}
+  .timeline h3{font-size:clamp(24px,2.8vw,36px);letter-spacing:-.035em}
+  .timeline p{color:var(--muted);font-size:17px}
+  @media (max-width:760px){ .timeline li{grid-template-columns:64px 1fr;gap:8px 16px} .timeline p{grid-column:2} }
+
+  /* FAQ */
+  .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(40px,7vw,110px);align-items:start}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq details:first-child{border-top:1px solid var(--line)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;padding:26px 0;font-family:var(--display);font-weight:600;font-size:clamp(19px,2vw,24px);letter-spacing:-.025em;line-height:1.3}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-weight:400;color:var(--muted);transition:transform .3s}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{padding:0 40px 26px 0;color:var(--soft);font-size:17px}
+  @media (max-width:900px){ .faq-grid{grid-template-columns:1fr} }
+
+  /* Contact */
+  .contact h2{font-size:clamp(52px,9vw,128px);margin-bottom:40px}
+  .contact .lead{margin-bottom:64px}
+  .channels{border-top:1px solid var(--line)}
+  .channel{display:grid;grid-template-columns:220px 1fr auto;align-items:center;gap:24px;padding:34px 0;border-bottom:1px solid var(--line);transition:padding .3s var(--ease)}
+  .channel:hover{padding-left:12px}
+  .channel strong{font-family:var(--display);font-weight:600;font-size:clamp(28px,4vw,48px);letter-spacing:-.035em}
+  .channel .go{font-size:28px;color:var(--muted);transition:transform .25s,color .25s}
+  .channel:hover .go{transform:translate(4px,-4px);color:var(--ink)}
+  @media (max-width:640px){ .channel{grid-template-columns:1fr auto;gap:8px 16px} .channel .label{grid-column:1 / -1} }
+
+  footer{border-top:1px solid var(--line);padding:36px 0 44px;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .about>*,.budget>*,.work>*,.qa>*,.faq-grid>*,.hero-grid>*{min-width:0}
+
+  /* Floating WhatsApp */
+  .float{
+    position:fixed;right:20px;bottom:20px;z-index:30;width:58px;height:58px;border-radius:50%;
+    background:var(--ink);color:#0b0b0b;display:grid;place-items:center;box-shadow:0 10px 40px rgba(0,0,0,.5);
+    transform:scale(0);transition:transform .35s cubic-bezier(.2,.8,.2,1.2);
+  }
+  .float.show{transform:scale(1)}
+  .float svg{width:28px;height:28px}
+
+  /* Ambient light that follows the cursor */
+  .glow{
+    position:fixed;left:0;top:0;z-index:0;pointer-events:none;
+    width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.075) 0%,rgba(255,255,255,.03) 32%,transparent 66%);
+    filter:blur(20px);will-change:transform;opacity:0;transition:opacity 1.2s;
+  }
+  .glow.on{opacity:1}
+  .grain{
+    position:fixed;inset:-50%;z-index:40;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 1.2s steps(6) infinite;
+  }
+  @keyframes grain{
+    0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}
+    60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}
+  }
+  /* Scroll progress */
+  .progress{position:fixed;left:0;top:0;height:2px;width:100%;z-index:50;background:var(--ink);transform-origin:0 50%;transform:scaleX(0);opacity:.7}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .card.reveal{transition:opacity .9s var(--ease),transform .9s var(--ease),border-color .3s}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .grain{animation:none}
+    *{animation:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
+
+<header id="top">
+  <div class="wrap">
+    <nav>
+      <a href="#" class="brand">José Neto</a>
+      <div class="links">
+        <a href="#sobre">Sobre</a>
+        <a href="#problemas">O que resolvo</a>
+        <a href="#orcamento">Orçamento</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#duvidas">Dúvidas</a>
+      </div>
+      <a class="btn" href="#contato">Pedir orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="reveal">Seu negócio<br>tem um problema.<br><span class="dim">Um bom site resolve.</span></h1>
+      <div class="hero-grid reveal">
+        <p class="lead">Sou José Neto, desenvolvedor web. Crio sites sob medida para empresas de qualquer tamanho, pensados a partir do problema que cada negócio precisa resolver.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contato">Quero um orçamento <span>→</span></a>
+          <a class="btn ghost" href="#projetos">Ver projetos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">O desenvolvedor</span>
+      </div>
+      <div class="about">
+        <div class="reveal">
+          <h2>Cada site,<br><span class="dim">um negócio diferente.</span></h2>
+          <div class="rule"></div>
+          <div class="stats">
+            <div class="stat"><b>Sob medida</b><span>nenhum projeto sai de um modelo pronto</span></div>
+            <div class="stat"><b>Direto</b><span>você fala com quem escreve o código</span></div>
+            <div class="stat"><b>Responsivo</b><span>funciona bem no celular e no computador</span></div>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="big">Antes de pensar em cores, layout ou tecnologia, eu quero entender a sua empresa: quem é o seu cliente, como ele te encontra e o que faz ele desistir no meio do caminho. O site nasce dessas respostas.</p>
+          <p class="big">Você acompanha cada etapa e conversa direto comigo, sem intermediários. Cada projeto recebe dedicação total, porque cada site entregue também é o meu cartão de visitas.</p>
+          <p class="quiet">Moro em João Pessoa, na Paraíba, e atendo empresas de qualquer lugar do Brasil, tudo online.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMAS -->
+  <section id="problemas">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">O que um site resolve</span>
+      </div>
+      <h2 class="reveal" style="margin-bottom:56px">Todo site é uma resposta.<br><span class="dim">Qual é a sua pergunta?</span></h2>
+      <div class="qa">
+        <div class="card q reveal">
+          <blockquote>Ninguém encontra minha empresa quando pesquisa no Google.</blockquote>
+          <div class="ans"><span>→</span><p>Presença própria na internet, estruturada para ser encontrada.</p></div>
+        </div>
+        <div class="card q reveal">
+          <blockquote>Passo o dia respondendo as mesmas perguntas no WhatsApp.</blockquote>
+          <div class="ans"><span>→</span><p>Horários, serviços, valores e localização num lugar só.</p></div>
+        </div>
+        <div class="card q reveal">
+          <blockquote>Só ter Instagram não passa confiança para o cliente.</blockquote>
+          <div class="ans"><span>→</span><p>Um endereço com o nome da sua marca, que transmite credibilidade.</p></div>
+        </div>
+        <div class="card q reveal">
+          <blockquote>Quero receber pedidos e agendamentos sem complicação.</blockquote>
+          <div class="ans"><span>→</span><p>Formulários e botões que levam o cliente direto até você.</p></div>
+        </div>
+        <div class="card q reveal">
+          <blockquote>Meu conteúdo está espalhado e ninguém acha nada.</blockquote>
+          <div class="ans"><span>→</span><p>Informação organizada, com seções claras e navegação simples.</p></div>
+        </div>
+        <div class="card q reveal">
+          <blockquote>Meu site atual é lento e parece abandonado.</blockquote>
+          <div class="ans"><span>→</span><p>Reformulação moderna, rápida e que funciona bem no celular.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORÇAMENTO -->
+  <section id="orcamento">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Orçamento</span>
+      </div>
+      <h2 class="reveal" style="margin-bottom:56px">Toda proposta<br><span class="dim">começa por ouvir.</span></h2>
+      <div class="budget">
+        <div class="card side invert reveal">
+          <span class="label">Como eu calculo</span>
+          <h3>Não existe tabela. Existe a sua empresa.</h3>
+          <p>Uma padaria de bairro e uma clínica com três unidades não têm a mesma necessidade, nem o mesmo caixa. Por isso eu não trabalho com pacotes: primeiro entendo a situação de cada cliente, depois monto uma proposta que faça sentido para ela.</p>
+          <div class="note">Se o valor ideal não couber agora, a gente define uma primeira versão enxuta e o site pode mudar com o negócio.</div>
+        </div>
+        <div class="card side reveal">
+          <span class="label">O que eu levo em conta</span>
+          <ol class="factors">
+            <li>O tamanho e o momento atual do seu negócio</li>
+            <li>Quantas páginas e funcionalidades o site precisa ter</li>
+            <li>O prazo que você tem em mente</li>
+            <li>O que é essencial agora e o que pode ficar para depois</li>
+            <li>Se você já tem domínio, logo e textos prontos</li>
+          </ol>
+          <p>Você recebe tudo por escrito, com valor e prazo definidos, antes de qualquer linha de código.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Portfólio</span>
+      </div>
+      <h2 class="reveal" style="margin-bottom:56px">Projetos<br><span class="dim">publicados.</span></h2>
+
+      <div class="work">
+        <article class="card project feature reveal">
+          <div class="shot">
+            <div class="browser">
+              <div class="bar"><i></i><i></i><i></i><em>centraldobelo.com.br</em></div>
+              <div class="mock">
+                <div class="kicker">Botafogo-PB · Notícias e análises</div>
+                <div class="title">Central<br>do Belo</div>
+                <div class="rows"><div></div><div></div><div></div></div>
+                <div class="lines"><span style="width:92%"></span><span style="width:76%"></span><span style="width:84%"></span></div>
+              </div>
+            </div>
+            <!-- Para usar um print real do site: salve a imagem em assets/centraldobelo.jpg e descomente a linha abaixo -->
+            <!-- <img src="assets/centraldobelo.jpg" alt="Captura de tela do site Central do Belo"> -->
+          </div>
+          <div class="info">
+            <div class="meta"><span>Portal de conteúdo</span><span>No ar</span></div>
+            <h3>Central do Belo</h3>
+            <p>Portal independente dedicado ao Botafogo-PB. O desafio era reunir notícias, análises de partidas, observação de atletas e mercado da bola num site fácil de navegar e de manter atualizado.</p>
+            <ul class="did">
+              <li>Planejamento das editorias</li>
+              <li>Design e desenvolvimento completos</li>
+              <li>Publicação e manutenção</li>
+            </ul>
+            <a class="visit" href="https://centraldobelo.com.br" target="_blank" rel="noopener">Abrir o site <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="card project reveal">
+          <div class="shot">
+            <div class="slot"><div><b>#02</b><small>Em produção</small></div></div>
+          </div>
+          <div class="info">
+            <div class="meta"><span>Em breve</span></div>
+            <h3>Novo projeto a caminho</h3>
+            <p>Um site em desenvolvimento neste momento. Vai aparecer aqui assim que for publicado.</p>
+          </div>
+        </article>
+
+        <article class="card project reveal">
+          <div class="shot">
+            <div class="slot"><div><b>#03</b><small>Espaço livre</small></div></div>
+          </div>
+          <div class="info">
+            <div class="meta"><span>Disponível</span></div>
+            <h3>O da sua empresa?</h3>
+            <p>Este espaço está reservado para o próximo negócio que quiser resolver um problema com um site.</p>
+            <a class="visit" href="#contato">Começar a conversa <span>↗</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETAPAS -->
+  <section id="etapas">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Etapas</span>
+      </div>
+      <h2 class="reveal" style="margin-bottom:56px">Do primeiro “oi”<br><span class="dim">ao site publicado.</span></h2>
+      <ol class="timeline reveal">
+        <li><span class="n">01</span><h3>Diagnóstico</h3><p>Você me conta sobre o negócio e eu faço perguntas até entender qual problema o site precisa resolver.</p></li>
+        <li><span class="n">02</span><h3>Proposta</h3><p>Envio escopo, valor e prazo por escrito. Só começamos quando estiver tudo claro para você.</p></li>
+        <li><span class="n">03</span><h3>Desenvolvimento</h3><p>Construo o site e compartilho prévias ao longo do caminho, para você acompanhar e ajustar.</p></li>
+        <li><span class="n">04</span><h3>Publicação</h3><p>Coloco o site no ar com domínio próprio, funcionando bem no computador e no celular.</p></li>
+        <li><span class="n">05</span><h3>Ajustes</h3><p>Você tem direito a duas rodadas de ajustes gerais: me diz o que quer mudar e eu deixo o site do jeito que você imaginou.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- DÚVIDAS -->
+  <section id="duvidas">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div class="reveal">
+          <span class="label">Dúvidas frequentes</span>
+          <h2 style="margin-top:28px">Perguntas<br><span class="dim">honestas.</span></h2>
+        </div>
+        <div class="faq reveal">
+          <details>
+            <summary>Por que seu preço é mais baixo que o de mercado?</summary>
+            <p>Porque estou no começo da carreira e prefiro ser transparente sobre isso. Esse momento me permite cobrar menos que agências e profissionais já estabelecidos enquanto construo meu portfólio com projetos bem feitos. Para você, é um site profissional por um valor que cabe no caixa.</p>
+          </details>
+          <details>
+            <summary>Preço mais baixo quer dizer qualidade menor?</summary>
+            <p>Não. O que muda é a fase da carreira, não o cuidado com o trabalho. Cada site entregue vira vitrine para os próximos clientes, então eu tenho todo o interesse em que o seu fique muito bem feito.</p>
+          </details>
+          <details>
+            <summary>Quanto custa um site?</summary>
+            <p>Depende do que a sua empresa precisa. Um site de uma página é bem diferente de um portal com várias seções. Depois de uma conversa rápida, eu envio uma proposta com o valor exato.</p>
+          </details>
+          <details>
+            <summary>Quanto tempo leva para ficar pronto?</summary>
+            <p>Varia com o tamanho do projeto. O prazo é combinado na proposta, antes de começar, e eu te mantenho informado a cada etapa.</p>
+          </details>
+          <details>
+            <summary>Preciso ter domínio, logo e textos prontos?</summary>
+            <p>Não. Se você já tiver, ótimo. Se não, eu te ajudo a registrar o domínio e a organizar o conteúdo do site.</p>
+          </details>
+          <details>
+            <summary>E se eu quiser mudar alguma coisa?</summary>
+            <p>Todo projeto inclui duas rodadas de ajustes gerais, para você pedir as mudanças que quiser até o site ficar do seu gosto. Alterações além disso, como páginas novas, são combinadas à parte.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="contact">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="label">Contato</span>
+      </div>
+      <h2 class="reveal">Tem um problema?<br><span class="dim">Me conta.</span></h2>
+      <p class="lead reveal">Me explica em poucas linhas o que a sua empresa faz e o que está te incomodando. Eu volto com as perguntas certas e, depois, com uma proposta feita só para você.</p>
+      <div class="channels reveal">
+        <a class="channel" href="https://wa.me/5581999646983?text=Ol%C3%A1%20Jos%C3%A9!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">
+          <span class="label">WhatsApp</span>
+          <strong>81 99964-6983</strong>
+          <span class="go">↗</span>
+        </a>
+        <a class="channel" href="https://instagram.com/josengomes_" target="_blank" rel="noopener">
+          <span class="label">Instagram</span>
+          <strong>@josengomes_</strong>
+          <span class="go">↗</span>
+        </a>
+        <a class="channel" href="https://github.com/josegnetto" target="_blank" rel="noopener">
+          <span class="label">GitHub</span>
+          <strong>josegnetto</strong>
+          <span class="go">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y"></span> José Neto · Desenvolvimento web · João Pessoa, PB</span>
+    <a href="#top">Topo ↑</a>
+  </div>
+</footer>
+
+<a class="float" id="wa" href="https://wa.me/5581999646983" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.57.94.95-3.48-.22-.36a9.41 9.41 0 0 1-1.44-5.02c0-5.2 4.23-9.43 9.44-9.43a9.4 9.4 0 0 1 9.43 9.44c0 5.2-4.24 9.43-9.44 9.43m8.03-17.46A11.3 11.3 0 0 0 12.05.72C5.8.72.7 5.8.7 12.07c0 2 .52 3.95 1.52 5.67L.6 23.72l6.1-1.6a11.3 11.3 0 0 0 5.35 1.36h.01c6.26 0 11.35-5.09 11.35-11.35 0-3.03-1.18-5.88-3.33-8.03"/></svg>
+</a>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const header = document.querySelector('header'), wa = document.getElementById('wa');
+  const onScroll = () => {
+    header.classList.toggle('scrolled', scrollY > 10);
+    wa.classList.toggle('show', scrollY > innerHeight * .7);
+  };
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Stagger cards that sit side by side in a grid
+  document.querySelectorAll('.qa, .work, .budget').forEach(g =>
+    [...g.children].forEach((c, i) => c.style.transitionDelay = (i % 3) * 90 + 'ms'));
+
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const glow = document.querySelector('.glow');
+  const bar = document.querySelector('.progress');
+  const hero = document.querySelector('.hero .wrap');
+
+  // Cursor light eases toward the pointer; on touch it drifts slowly on its own
+  let tx = innerWidth * .7, ty = innerHeight * .3, x = tx, y = ty;
+  if (fine) {
+    addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; glow.classList.add('on'); }, {passive:true});
+    document.addEventListener('pointerleave', () => glow.classList.remove('on'));
+  } else {
+    glow.classList.add('on');
+  }
+  const tick = t => {
+    if (!fine) { tx = innerWidth * (.5 + .3 * Math.sin(t / 5200)); ty = innerHeight * (.4 + .25 * Math.cos(t / 6100)); }
+    x += (tx - x) * .08; y += (ty - y) * .08;
+    glow.style.transform = `translate3d(${x}px,${y}px,0)`;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    if (scrollY < innerHeight) {
+      hero.style.transform = `translate3d(0,${scrollY * .18}px,0)`;
+      hero.style.opacity = 1 - scrollY / (innerHeight * 1.1);
+    }
+    requestAnimationFrame(tick);
+  };
+  if (!still) requestAnimationFrame(tick); else glow.classList.add('on');
+
+  // Per-card highlight position
+  if (fine) document.querySelectorAll('.card').forEach(c =>
+    c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', e.clientX - r.left + 'px');
+      c.style.setProperty('--my', e.clientY - r.top + 'px');
+    }, {passive:true}));
+</script>
+</body>
+</html>
