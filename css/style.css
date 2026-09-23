@@ -89,10 +89,16 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .about .quiet{margin-top:28px;font-size:clamp(16px,1.6vw,19px);color:var(--muted)}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
 .stat{background:var(--bg-2);padding:26px 22px}
-.stat b{display:block;font-family:var(--display);font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;line-height:1}
+.about-intro{container-type:inline-size}
+.stat b{display:block;font-family:var(--display);font-size:clamp(20px,calc((33.3cqi - 44px) / 5.3),34px);letter-spacing:-.04em;line-height:1}
 .stat span{display:block;margin-top:10px;font-size:14px;color:var(--muted);line-height:1.4}
 @media (max-width:900px){ .about{grid-template-columns:1fr} }
-@media (max-width:480px){ .stat{padding:20px 14px} .stat span{font-size:12.5px} }
+@container (max-width:600px){
+  .stats{grid-template-columns:1fr}
+  .stat{padding:22px}
+  .stat b{font-size:26px}
+  .stat span{margin-top:8px}
+}
 
 /* Problems */
 .qa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
@@ -175,6 +181,8 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq details p{padding:0 40px 26px 0;color:var(--soft);font-size:17px}
 @media (max-width:900px){ .faq-grid{grid-template-columns:1fr} }
+.faq-intro{container-type:inline-size}
+.faq-intro h2{font-size:min(clamp(42px,7vw,92px),22cqi)}
 
 /* Contact */
 .contact h2{font-size:clamp(52px,9vw,128px);margin-bottom:40px}
