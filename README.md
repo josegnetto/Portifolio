@@ -6,7 +6,9 @@ Sites sob medida para empresas, com orçamento personalizado para cada cliente.
 ## Estrutura
 
 ```
-index.html     página única (HTML, CSS e JS no mesmo arquivo)
+index.html     estrutura e conteúdo da página
+css/style.css  estilos (cores, tipografia, layout, responsividade)
+js/main.js     efeitos: luz que segue o mouse, animações de entrada, barra de progresso
 favicon.svg    ícone da aba
 assets/        imagens (prints de projetos etc.)
 vercel.json    configuração de deploy na Vercel
