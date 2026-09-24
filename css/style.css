@@ -61,7 +61,6 @@ nav{display:flex;align-items:center;justify-content:space-between;height:76px}
 
 /* Sections */
 section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
-.sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:clamp(36px,5vw,64px)}
 .card{position:relative;isolation:isolate;background:var(--card);border:1px solid var(--line);border-radius:26px;transition:border-color .3s}
 .card:hover{border-color:#343434}
 .card::before{
