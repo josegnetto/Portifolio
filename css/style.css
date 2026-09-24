@@ -101,9 +101,9 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .rotator>span.on{opacity:1;transform:none}
 .rotator>span.out{opacity:0;transform:translateY(-90%)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-/* Title sized by width (4 lines, longest is "Um bom site convence." ≈ 9.6em) and by screen height,
+/* Title sized by width (4 lines, longest is "Quem trabalha por você" ≈ 10.2em) and by screen height,
    so the whole first screen fits without scrolling */
-.hero h1{font-size:clamp(34px,min(calc(100cqi / 9.7),calc((100svh - 360px) / 3.84)),144px);font-weight:800;margin-bottom:clamp(20px,4svh,48px)}
+.hero h1{font-size:clamp(34px,min(calc(100cqi / 10.4),calc((100svh - 360px) / 3.84)),144px);font-weight:800;margin-bottom:clamp(20px,4svh,48px)}
 .hero h1 .dim{font-weight:600;white-space:nowrap}
 .hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:32px 64px;align-items:end}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
