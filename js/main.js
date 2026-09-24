@@ -42,6 +42,21 @@ const tick = t => {
 };
 if (!still) requestAnimationFrame(tick); else glow.classList.add('on');
 
+// Last word of the hero title cycles through what a good site does
+const words = [...document.querySelectorAll('.rotator > span')];
+if (!still && words.length > 1) {
+  let cur = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    const prev = words[cur];
+    cur = (cur + 1) % words.length;
+    prev.classList.replace('on', 'out');
+    words[cur].classList.remove('out');
+    words[cur].classList.add('on');
+    setTimeout(() => prev.classList.remove('out'), 900);
+  }, 2200);
+}
+
 // Per-card highlight position
 if (fine) document.querySelectorAll('.card').forEach(c =>
   c.addEventListener('pointermove', e => {
