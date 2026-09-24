@@ -6,8 +6,7 @@
   --ink:#f3f2ee;
   --muted:#7c7a76;
   --soft:#a9a7a2;
-  /* Meaningful color only: red = problem, green = solution/ok, blue = info/navigation */
-  --no:#f2685c;
+  /* Meaningful color only: green = solution/ok, blue = info/navigation */
   --ok:#57d18b;
   --info:#6fa8ff;
   --belo:#e8352b;
@@ -133,7 +132,6 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .q blockquote{font-family:var(--display);font-weight:500;font-size:clamp(20px,1.9vw,24px);letter-spacing:-.025em;line-height:1.25;color:var(--muted)}
 .q blockquote::before{content:"“"}
 .q blockquote::after{content:"”"}
-.q blockquote::before,.q blockquote::after{color:var(--no)}
 .q .ans{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
 .q .ans span{font-size:20px;line-height:1.3;color:var(--ok)}
 .q .ans p{font-family:var(--display);font-weight:600;font-size:clamp(18px,1.7vw,21px);letter-spacing:-.02em;line-height:1.3}
