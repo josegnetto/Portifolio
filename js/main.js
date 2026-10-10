@@ -57,6 +57,49 @@ if (!still && words.length > 1) {
   }, 2200);
 }
 
+// Budget wireframe: blocks glide between three site layouts
+const morph = document.querySelector('.morph');
+if (morph) {
+  // [left, top, width, height] in % of the stage, plus the block's look
+  const L = [
+    [ // clinic: hero photo + text, three service cards
+      [0,0,100,8,'nav'],[0,14,48,46,'img'],[54,17,42,7,'strong'],[54,29,44,4,'line'],[54,36,34,4,'line'],
+      [54,47,22,8,'btn'],[0,68,31.3,32,'card'],[34.3,68,31.3,32,'card'],[68.7,68,31.3,32,'card'],[78,47,18,8,'ghost',0]],
+    [ // news portal: featured story + headline list
+      [0,0,100,8,'nav'],[0,14,63,50,'img'],[0,69,58,6,'strong'],[0,79,63,4,'line'],[0,86,44,4,'line'],
+      [68,14,32,19,'card'],[68,37,32,19,'card'],[68,60,32,19,'card'],[68,83,32,17,'card'],[30,86,0,4,'line',0]],
+    [ // startup: centered pitch, two buttons, big product shot
+      [0,0,100,8,'nav'],[12,58,76,42,'img'],[18,15,64,8,'strong'],[26,27,48,4,'line'],[33,34,34,4,'line'],
+      [27,44,21,8,'btn'],[50,79,0,0,'card',0],[50,79,0,0,'card',0],[50,79,0,0,'card',0],[52,44,21,8,'ghost']],
+  ];
+  const blocks = [...morph.querySelectorAll('.mstage .b')];
+  const btns = [...morph.querySelectorAll('.mdots button')];
+  const frame = morph.querySelector('.mframe');
+  let cur = 0, timer = 0, seen = false;
+  const show = n => {
+    cur = (n + L.length) % L.length;
+    L[cur].forEach(([x, y, w, h, k, o = 1], i) => {
+      const b = blocks[i];
+      Object.assign(b.style, { left: x + '%', top: y + '%', width: w + '%', height: h + '%', opacity: o, transitionDelay: i * 35 + 'ms' });
+      b.className = 'b k-' + k;
+    });
+    btns.forEach((btn, i) => btn.setAttribute('aria-pressed', i === cur));
+  };
+  const auto = () => { clearInterval(timer); if (!still && seen) timer = setInterval(() => !document.hidden && show(cur + 1), 3600); };
+  btns.forEach((btn, i) => btn.addEventListener('click', () => { show(i); auto(); }));
+  frame.addEventListener('click', () => { show(cur + 1); auto(); });
+  if (fine && !still) {
+    frame.addEventListener('pointermove', e => {
+      const r = frame.getBoundingClientRect();
+      frame.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 10 + 'deg');
+      frame.style.setProperty('--rx', ((e.clientY - r.top) / r.height - .5) * -10 + 'deg');
+    }, {passive:true});
+    frame.addEventListener('pointerleave', () => { frame.style.setProperty('--rx', '0deg'); frame.style.setProperty('--ry', '0deg'); });
+  }
+  new IntersectionObserver(([e]) => { if (e.isIntersecting !== seen) { seen = e.isIntersecting; auto(); } }, {threshold:.3}).observe(morph);
+  show(0);
+}
+
 // Per-card highlight position
 if (fine) document.querySelectorAll('.card').forEach(c =>
   c.addEventListener('pointermove', e => {
