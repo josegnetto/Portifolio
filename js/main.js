@@ -57,6 +57,22 @@ if (!still && words.length > 1) {
   }, 2200);
 }
 
+// Statement: map scroll through the tall section to a 0..1 reveal, eased like a spring
+const statement = document.querySelector('.statement');
+if (statement && !still) {
+  const words = [...statement.querySelectorAll('.w')];
+  const START = .08, END = .92, step = (END - START) / words.length;
+  let smooth = 0, raf = 0, active = false;
+  const frame = () => {
+    const r = statement.getBoundingClientRect();
+    const target = Math.min(Math.max(-r.top / (r.height - innerHeight), 0), 1);
+    smooth += (target - smooth) * .16;
+    words.forEach((w, i) => w.style.setProperty('--p', Math.min(Math.max((smooth - START) / step - i, 0), 1).toFixed(3)));
+    raf = active || Math.abs(target - smooth) > .001 ? requestAnimationFrame(frame) : 0;
+  };
+  new IntersectionObserver(([e]) => { active = e.isIntersecting; if (active && !raf) raf = requestAnimationFrame(frame); }).observe(statement);
+}
+
 // Budget wireframe: blocks glide between three site layouts
 const morph = document.querySelector('.morph');
 if (morph) {
