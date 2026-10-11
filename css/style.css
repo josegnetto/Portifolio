@@ -119,15 +119,15 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 
 /* Statement pinned to the screen; words light up in reading order as you scroll */
 .statement{position:relative;min-height:220svh;padding:0}
-.statement-pin{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
+.statement-pin{position:sticky;top:0;z-index:2;height:100svh;display:flex;align-items:center;overflow:hidden}
 .statement-pin .wrap{width:100%}
 .statement-text{font-family:var(--display);font-weight:700;font-size:clamp(34px,6.2vw,88px);line-height:1.04;letter-spacing:-.04em;text-wrap:balance}
 .sl{display:block}
-.statement .w{opacity:calc(.14 + var(--p,0) * .86)}
+.statement .w{color:color-mix(in srgb,var(--ink) calc(var(--p,0) * 100%),#262626)}
 @media (prefers-reduced-motion:reduce){
   .statement{min-height:0;padding:clamp(88px,12vw,150px) 0}
   .statement-pin{position:static;height:auto}
-  .statement .w{opacity:1}
+  .statement .w{color:var(--ink)}
 }
 
 /* About */
