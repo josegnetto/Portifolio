@@ -10,6 +10,7 @@
   --ok:#57d18b;
   --info:#6fa8ff;
   --belo:#e8352b;
+  --sensus:#cba757;
   --display:"Inter Tight",system-ui,sans-serif;
   --body:"Inter",system-ui,sans-serif;
   --label:"Inter",system-ui,sans-serif;
@@ -224,6 +225,16 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .belo .visit span,.belo .visit:hover span{color:var(--belo)}
 .card.belo::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(232,53,43,.09),transparent 60%)}
 .card.belo:hover{border-color:rgba(232,53,43,.4)}
+/* Sensus keeps its own gold; image on the right to alternate with the card above */
+.project.feature.rev{grid-template-columns:1fr 1.25fr}
+.project.feature.rev .shot{order:2;border-right:0;border-left:1px solid var(--line)}
+.sensus .meta .kicker{color:var(--sensus)}
+.sensus h3::before{content:"";display:inline-block;width:.42em;height:.42em;border-radius:50%;background:var(--sensus);vertical-align:.12em;margin-right:.3em}
+.sensus .did li::before{color:var(--sensus);opacity:.85}
+.sensus .visit span,.sensus .visit:hover span{color:var(--sensus)}
+.card.sensus::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(203,167,87,.09),transparent 60%)}
+.card.sensus:hover{border-color:rgba(203,167,87,.4)}
+.sensus .shot{background:#121027}
 .slot{
   position:absolute;inset:clamp(18px,3vw,36px);border:1px dashed #2f2f2f;border-radius:14px;
   display:grid;place-items:center;text-align:center;color:var(--muted);
@@ -235,6 +246,8 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
   .work{grid-template-columns:1fr}
   .project.feature{grid-template-columns:1fr}
   .project.feature .shot{border-right:0;border-bottom:1px solid var(--line);min-height:0;aspect-ratio:16/11}
+  .project.feature.rev{grid-template-columns:1fr}
+  .project.feature.rev .shot{order:0;border-left:0}
 }
 
 /* Timeline */
