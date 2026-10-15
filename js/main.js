@@ -57,15 +57,14 @@ if (!still && words.length > 1) {
   }, 2200);
 }
 
-// Problem rows: light up the row nearest the middle of the screen, or the one under the mouse
+// Problem rows: light up the row nearest the middle of the screen as you scroll
 const qa = document.querySelector('.qa');
 if (qa) {
   const rows = [...qa.querySelectorAll('.q')];
-  let hovered = null, ticking = false;
+  let ticking = false;
   const light = row => rows.forEach(r => r.classList.toggle('on', r === row));
   const update = () => {
     ticking = false;
-    if (hovered) return light(hovered);
     const r = qa.getBoundingClientRect();
     if (r.bottom < 0 || r.top > innerHeight) return;
     const mid = innerHeight / 2;
@@ -77,10 +76,6 @@ if (qa) {
     light(best);
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive:true});
-  if (fine) rows.forEach(row => {
-    row.addEventListener('pointerenter', () => { hovered = row; update(); });
-    row.addEventListener('pointerleave', () => { hovered = null; update(); });
-  });
   qa.classList.add('live');
   update();
 }

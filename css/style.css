@@ -153,7 +153,7 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 
 /* Problems */
 /* Problems as rows: complaint left, answer right; each row only as tall as its text.
-   The row in the middle of the screen (or under the mouse) lights up; colors stay solid so the grid never shows through */
+   The row in the middle of the screen lights up as you scroll; colors stay solid so the grid never shows through */
 .qa{border-top:1px solid var(--line)}
 .qa .q{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,5vw,72px);align-items:baseline;padding:clamp(26px,3vw,36px) 0;border-bottom:1px solid var(--line)}
 .qa .q.reveal{transition:opacity .9s var(--ease),transform .9s var(--ease),padding .4s var(--ease)}
