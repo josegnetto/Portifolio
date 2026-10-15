@@ -1,6 +1,6 @@
 # Portfólio — José Neto
 
-Site de portfólio de José Neto, desenvolvedor web em João Pessoa (PB).
+Site de portfólio de José Neto, desenvolvedor web. Atendimento em todo o Brasil.
 Sites sob medida para empresas, com orçamento personalizado para cada cliente.
 
 ## Estrutura
