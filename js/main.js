@@ -80,6 +80,28 @@ if (qa) {
   update();
 }
 
+// Showcase: scroll each site inside its browser frame as the card crosses the screen
+const shows = [...document.querySelectorAll('.showcase')];
+if (shows.length && !still) {
+  let ticking = false;
+  const move = () => {
+    ticking = false;
+    shows.forEach(sc => {
+      const r = sc.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      let p = Math.min(Math.max((innerHeight * .75 - r.top) / (innerHeight * .75 + r.height * .45), 0), 1);
+      p = p * p * (3 - 2 * p);
+      const vp = sc.querySelector('.viewport'), st = sc.querySelector('.strip');
+      st.style.transform = `translate3d(0,${-(st.offsetHeight - vp.clientHeight) * p}px,0)`;
+    });
+  };
+  const ask = () => { if (!ticking) { ticking = true; requestAnimationFrame(move); } };
+  addEventListener('scroll', ask, {passive:true});
+  addEventListener('resize', ask);
+  addEventListener('load', ask);
+  move();
+}
+
 // Statement: map scroll through the tall section to a 0..1 reveal, eased like a spring
 const statement = document.querySelector('.statement');
 if (statement && !still) {

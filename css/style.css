@@ -206,15 +206,11 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 /* Work */
 .work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .project{overflow:hidden;display:flex;flex-direction:column}
-.project.feature{grid-column:1 / -1;display:grid;grid-template-columns:1.25fr 1fr}
-.shot{position:relative;background:#0f0f0f;border-bottom:1px solid var(--line);aspect-ratio:16/10;overflow:hidden}
-.project.feature .shot{border-bottom:0;border-right:1px solid var(--line);aspect-ratio:auto;min-height:400px}
 .browser{position:absolute;inset:clamp(18px,3vw,36px) clamp(18px,3vw,36px) 0;border-radius:14px 14px 0 0;border:1px solid #2a2a2a;border-bottom:0;background:#141414;overflow:hidden;transition:transform .5s var(--ease)}
 .project:hover .browser{transform:translateY(-8px)}
 .bar{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:1px solid #242424}
 .bar i{width:10px;height:10px;border-radius:50%;background:#2d2d2d}
 .bar em{margin-left:14px;font-style:normal;font-size:12px;color:var(--muted);background:#1c1c1c;padding:4px 12px;border-radius:999px;font-family:var(--label);letter-spacing:.04em}
-.browser .screen{display:block;width:100%;height:auto}
 .info{padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;gap:14px;flex:1}
 .info h3{font-size:clamp(28px,3.2vw,42px)}
 .info p{color:var(--soft);font-size:17px}
@@ -222,16 +218,34 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .visit{margin-top:auto;padding-top:14px;display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:17px}
 .visit span{transition:transform .25s}
 .visit:hover span{transform:translate(3px,-3px);color:var(--info)}
-.info .meta.soon{color:var(--info)}
 .info .meta.open{color:var(--ok)}
 /* Central do Belo keeps its own brand red */
 .belo .visit span,.belo .visit:hover span{color:var(--belo)}
 .card.belo::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(232,53,43,.09),transparent 60%)}
 .card.belo:hover{border-color:rgba(232,53,43,.4)}
-/* Image-first project cards: full-width screenshot, then one row with name, line and link */
 .work{grid-template-columns:1fr}
-.project.feature{display:flex;flex-direction:column}
-.project.feature .shot{aspect-ratio:16/8.4;min-height:0;border:0;border-bottom:1px solid var(--line)}
+/* Showcase: the site scrolls inside the browser frame as the page scrolls; phone mockup overlaps the corner */
+.showcase .stage{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(70% 85% at 50% 115%,var(--glow),transparent 70%),#0e0e0e}
+.belo{--glow:rgba(232,53,43,.24)}
+.sensus{--glow:rgba(203,167,87,.24)}
+.showcase .browser{inset:8% 6% 0;display:flex;flex-direction:column;box-shadow:0 -20px 60px -20px rgba(0,0,0,.6)}
+.showcase:has(.phone) .browser{right:16%}
+.viewport{position:relative;flex:1;overflow:hidden}
+.strip{position:absolute;left:0;right:0;top:0;will-change:transform}
+.strip img{display:block;width:100%;height:auto}
+.phone{position:absolute;right:5%;bottom:-7%;width:clamp(92px,17%,220px);aspect-ratio:600/1299;border-radius:clamp(16px,2.3vw,32px);border:clamp(4px,.55vw,7px) solid #1d1d1d;background:#000;overflow:hidden;box-shadow:0 30px 70px -10px rgba(0,0,0,.85),0 0 0 1px #2c2c2c;transition:transform .6s var(--ease)}
+.phone img{display:block;width:100%;height:auto}
+.project:hover .phone{transform:translateY(-12px)}
+.showcase h3{font-size:clamp(30px,3.8vw,52px)}
+.pnum{font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.16em;color:var(--muted)}
+.belo .pnum{color:var(--belo)}
+.sensus .pnum{color:var(--sensus)}
+@media (max-width:700px){
+  .showcase .stage{aspect-ratio:4/3.4}
+  .showcase .browser{inset:7% 4% 0}
+  .showcase:has(.phone) .browser{right:22%}
+  .phone{width:30%;right:4%}
+}
 .project .info{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:32px;row-gap:6px;align-items:center}
 .project .info > *{grid-column:1}
 .project .info .visit{grid-column:2;grid-row:1 / span 3;margin:0;padding:0;white-space:nowrap}
@@ -241,12 +255,6 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .sensus .visit span,.sensus .visit:hover span{color:var(--sensus)}
 .card.sensus::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(203,167,87,.09),transparent 60%)}
 .card.sensus:hover{border-color:rgba(203,167,87,.4)}
-.sensus .shot{background:#121027}
-@media (max-width:900px){
-  .work{grid-template-columns:1fr}
-  .project.feature{grid-template-columns:1fr}
-  .project.feature .shot{border-right:0;border-bottom:1px solid var(--line);min-height:0;aspect-ratio:16/11}
-}
 
 /* Timeline */
 .timeline{list-style:none;border-top:1px solid var(--line)}
