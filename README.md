@@ -30,7 +30,7 @@ No `index.html`, dentro da seção `#projetos`, copie um bloco
 
 ## Deploy
 
-Hospedado na Vercel em https://joseneto-dev.vercel.app, com deploy automático a cada push na branch `main`.
+Hospedado na Vercel em https://webneto.com.br, com deploy automático a cada push na branch `main`.
 
 ## Contato
 
