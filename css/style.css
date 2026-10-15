@@ -217,7 +217,6 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .info .meta.soon{color:var(--info)}
 .info .meta.open{color:var(--ok)}
 /* Central do Belo keeps its own brand red */
-.belo h3::before{content:"★";color:var(--belo);font-size:.62em;vertical-align:.32em;margin-right:.35em}
 .belo .did li::before{color:var(--belo);opacity:.8}
 .belo .visit span,.belo .visit:hover span{color:var(--belo)}
 .card.belo::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(232,53,43,.09),transparent 60%)}
@@ -225,7 +224,6 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 /* Sensus keeps its own gold; image on the right to alternate with the card above */
 .project.feature.rev{grid-template-columns:1fr 1.25fr}
 .project.feature.rev .shot{order:2;border-right:0;border-left:1px solid var(--line)}
-.sensus h3::before{content:"";display:inline-block;width:.42em;height:.42em;border-radius:50%;background:var(--sensus);vertical-align:.12em;margin-right:.3em}
 .sensus .did li::before{color:var(--sensus);opacity:.85}
 .sensus .visit span,.sensus .visit:hover span{color:var(--sensus)}
 .card.sensus::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(203,167,87,.09),transparent 60%)}
