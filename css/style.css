@@ -152,16 +152,27 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 }
 
 /* Problems */
-.qa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.q{padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;gap:18px;min-height:280px}
-.q blockquote{font-family:var(--display);font-weight:500;font-size:clamp(20px,1.9vw,24px);letter-spacing:-.025em;line-height:1.25;color:var(--muted)}
+/* Problems as rows: complaint left, answer right; each row only as tall as its text.
+   The row in the middle of the screen (or under the mouse) lights up; colors stay solid so the grid never shows through */
+.qa{border-top:1px solid var(--line)}
+.qa .q{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,5vw,72px);align-items:baseline;padding:clamp(26px,3vw,36px) 0;border-bottom:1px solid var(--line)}
+.qa .q.reveal{transition:opacity .9s var(--ease),transform .9s var(--ease),padding .4s var(--ease)}
+.qa .q::before{content:"";position:absolute;left:0;top:clamp(26px,3vw,36px);bottom:clamp(26px,3vw,36px);width:2px;border-radius:2px;background:var(--ink);transform:scaleY(0);transition:transform .4s var(--ease)}
+.q blockquote{font-family:var(--display);font-weight:500;font-size:clamp(20px,1.9vw,24px);letter-spacing:-.025em;line-height:1.3;color:var(--muted);transition:color .4s}
 .q blockquote::before{content:"“"}
 .q blockquote::after{content:"”"}
-.q .ans{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
-.q .ans span{font-size:20px;line-height:1.3;color:var(--ok)}
-.q .ans p{font-family:var(--display);font-weight:600;font-size:clamp(18px,1.7vw,21px);letter-spacing:-.02em;line-height:1.3}
-@media (max-width:1000px){ .qa{grid-template-columns:repeat(2,minmax(0,1fr))} }
-@media (max-width:620px){ .qa{grid-template-columns:1fr} .q{min-height:0} }
+.q .ans{display:flex;gap:12px;align-items:flex-start}
+.q .ans span{font-size:20px;line-height:1.3;color:var(--ok);transition:transform .4s var(--ease),color .4s}
+.q .ans p{font-family:var(--display);font-weight:600;font-size:clamp(18px,1.7vw,21px);letter-spacing:-.02em;line-height:1.3;transition:color .4s}
+.qa.live .q blockquote{color:#3a3a3a}
+.qa.live .q .ans p{color:#4d4c49}
+.qa.live .q .ans span{color:#3a3a3a}
+.qa.live .q.on{padding-left:22px}
+.qa.live .q.on::before{transform:scaleY(1)}
+.qa.live .q.on blockquote{color:var(--soft)}
+.qa.live .q.on .ans p{color:var(--ink)}
+.qa.live .q.on .ans span{color:var(--ok);transform:translateX(4px)}
+@media (max-width:760px){ .qa .q{grid-template-columns:1fr;gap:14px} .qa.live .q.on{padding-left:16px} }
 
 /* Budget */
 .budget{display:grid;grid-template-columns:1fr 1.05fr;gap:18px;align-items:stretch}

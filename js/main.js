@@ -11,7 +11,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // Stagger cards that sit side by side in a grid
-document.querySelectorAll('.qa, .work, .budget').forEach(g =>
+document.querySelectorAll('.work, .budget').forEach(g =>
   [...g.children].forEach((c, i) => c.style.transitionDelay = (i % 3) * 90 + 'ms'));
 
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -55,6 +55,34 @@ if (!still && words.length > 1) {
     words[cur].classList.add('on');
     setTimeout(() => prev.classList.remove('out'), 900);
   }, 2200);
+}
+
+// Problem rows: light up the row nearest the middle of the screen, or the one under the mouse
+const qa = document.querySelector('.qa');
+if (qa) {
+  const rows = [...qa.querySelectorAll('.q')];
+  let hovered = null, ticking = false;
+  const light = row => rows.forEach(r => r.classList.toggle('on', r === row));
+  const update = () => {
+    ticking = false;
+    if (hovered) return light(hovered);
+    const r = qa.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    const mid = innerHeight / 2;
+    let best = rows[0], dist = Infinity;
+    for (const row of rows) {
+      const b = row.getBoundingClientRect(), d = Math.abs(b.top + b.height / 2 - mid);
+      if (d < dist) { dist = d; best = row; }
+    }
+    light(best);
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive:true});
+  if (fine) rows.forEach(row => {
+    row.addEventListener('pointerenter', () => { hovered = row; update(); });
+    row.addEventListener('pointerleave', () => { hovered = null; update(); });
+  });
+  qa.classList.add('live');
+  update();
 }
 
 // Statement: map scroll through the tall section to a 0..1 reveal, eased like a spring
