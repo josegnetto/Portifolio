@@ -119,7 +119,7 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 }
 
 /* Statement pinned to the screen; words light up in reading order as you scroll */
-.statement{position:relative;min-height:220svh;padding:0}
+.statement{position:relative;min-height:170svh;padding:0}
 .statement-pin{position:sticky;top:0;z-index:2;height:100svh;display:flex;align-items:center;overflow:hidden}
 .statement-pin .wrap{width:100%}
 .statement-text{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.4vw,64px);line-height:1.08;letter-spacing:-.035em;text-wrap:pretty;max-width:22ch}
@@ -133,17 +133,16 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 }
 
 /* About */
-.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,110px);align-items:start}
-.rule{width:120px;height:1px;background:#3a3a3a;margin:36px 0}
+.about{display:block}
+.about .big{max-width:40ch;margin-top:28px}
+.about .stats{margin-top:clamp(36px,5vw,56px)}
 .about .big{font-size:clamp(19px,2.1vw,24px);line-height:1.6}
-.about .big + .big{margin-top:22px}
-.about .quiet{margin-top:28px;font-size:clamp(16px,1.6vw,19px);color:var(--muted)}
+.about .quiet{margin-top:12px;font-size:clamp(16px,1.6vw,19px);color:var(--muted)}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
 .stat{background:var(--bg-2);padding:26px 22px}
 .about-intro{container-type:inline-size}
 .stat b{display:block;font-family:var(--display);font-size:clamp(20px,calc((33.3cqi - 44px) / 5.3),34px);letter-spacing:-.04em;line-height:1}
 .stat span{display:block;margin-top:10px;font-size:14px;color:var(--muted);line-height:1.4}
-@media (max-width:900px){ .about{grid-template-columns:1fr} }
 @container (max-width:600px){
   .stats{grid-template-columns:1fr}
   .stat{padding:22px}
@@ -220,39 +219,33 @@ section{padding:clamp(88px,12vw,150px) 0;border-top:1px solid var(--line)}
 .info h3{font-size:clamp(28px,3.2vw,42px)}
 .info p{color:var(--soft);font-size:17px}
 .info .meta{font-family:var(--label);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.did{list-style:none;display:grid;gap:8px;font-size:15px;color:var(--muted)}
-.did li::before{content:"— ";color:#4a4a4a}
 .visit{margin-top:auto;padding-top:14px;display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:17px}
 .visit span{transition:transform .25s}
 .visit:hover span{transform:translate(3px,-3px);color:var(--info)}
 .info .meta.soon{color:var(--info)}
 .info .meta.open{color:var(--ok)}
 /* Central do Belo keeps its own brand red */
-.belo .did li::before{color:var(--belo);opacity:.8}
 .belo .visit span,.belo .visit:hover span{color:var(--belo)}
 .card.belo::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(232,53,43,.09),transparent 60%)}
 .card.belo:hover{border-color:rgba(232,53,43,.4)}
-/* Sensus keeps its own gold; image on the right to alternate with the card above */
-.project.feature.rev{grid-template-columns:1fr 1.25fr}
-.project.feature.rev .shot{order:2;border-right:0;border-left:1px solid var(--line)}
-.sensus .did li::before{color:var(--sensus);opacity:.85}
+/* Image-first project cards: full-width screenshot, then one row with name, line and link */
+.work{grid-template-columns:1fr}
+.project.feature{display:flex;flex-direction:column}
+.project.feature .shot{aspect-ratio:16/8.4;min-height:0;border:0;border-bottom:1px solid var(--line)}
+.project .info{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:32px;row-gap:6px;align-items:center}
+.project .info > *{grid-column:1}
+.project .info .visit{grid-column:2;grid-row:1 / span 3;margin:0;padding:0;white-space:nowrap}
+.project.next .info{padding-block:clamp(22px,2.6vw,32px)}
+@media (max-width:600px){ .project .info{grid-template-columns:1fr} .project .info .visit{grid-column:1;grid-row:auto;margin-top:8px} }
+/* Sensus keeps its own gold */
 .sensus .visit span,.sensus .visit:hover span{color:var(--sensus)}
 .card.sensus::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(203,167,87,.09),transparent 60%)}
 .card.sensus:hover{border-color:rgba(203,167,87,.4)}
 .sensus .shot{background:#121027}
-.slot{
-  position:absolute;inset:clamp(18px,3vw,36px);border:1px dashed #2f2f2f;border-radius:14px;
-  display:grid;place-items:center;text-align:center;color:var(--muted);
-  background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(255,255,255,.015) 14px 28px);
-}
-.slot b{display:block;font-family:var(--display);font-size:clamp(40px,5vw,64px);letter-spacing:-.04em;color:#2c2c2c;line-height:1;margin-bottom:8px}
-.slot small{font-family:var(--label);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
 @media (max-width:900px){
   .work{grid-template-columns:1fr}
   .project.feature{grid-template-columns:1fr}
   .project.feature .shot{border-right:0;border-bottom:1px solid var(--line);min-height:0;aspect-ratio:16/11}
-  .project.feature.rev{grid-template-columns:1fr}
-  .project.feature.rev .shot{order:0;border-left:0}
 }
 
 /* Timeline */
